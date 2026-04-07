@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sabores do Chef - Restaurante</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fef9f0;
+        }
+
+        /* Header / Navegação */
+        header {
+            background-color: #8B0000;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #FFD700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Container padrão */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* Seção Sobre */
+        .about {
+            background-color: white;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .about h2, .menu h2, .contact h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #8B0000;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #FFD700;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Cardápio */
+        .menu-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .menu-category h3 {
+            font-size: 1.8rem;
+            color: #8B0000;
+            margin-bottom: 1rem;
+            padding-left: 10px;
+            border-left: 5px solid #FFD700;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-img {
+            width: 80px;
+            height: 80px;
+            background-color: #f0e6d2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .menu-info {
+            flex: 1;
+        }
+
+        .menu-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #8B0000;
+            font-size: 1.1rem;
+        }
+
+        /* Informação de reserva */
+        .reserve-note {
+            background-color: #fff3e0;
+            border-left: 5px solid #8B0000;
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        /* Contato e Localização */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .contact-details, .map {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-details p {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            border: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c2c2c;
+            color: #ccc;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                margin-top: 10px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .menu-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">SABORES <span>DO CHEF</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Experiência gastronômica única</h1>
+                <p>Venha viver sabores que contam histórias. Ambiente aconchegante e pratos preparados com ingredientes selecionados.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="sobre" class="about">
+            <div style="text-align: center;">
+                <h2>Sobre Nós</h2>
+            </div>
+            <div class="about-text">
+                <p>Há mais de 10 anos, o Sabores do Chef traz o melhor da culinária contemporânea em um ambiente acolhedor. Nossa missão é transformar cada refeição em um momento especial, com pratos elaborados pelo Chef Ricardo e sua equipe. Trabalhamos apenas com produtos frescos e de fornecedores locais.</p>
+                <br>
+                <p><strong>⚠️ Atendimento exclusivamente no local – não realizamos entregas.</strong> Venha nos visitar e viva essa experiência!</p>
+            </div>
+        </section>
+
+        <section id="cardapio" class="menu">
+            <div style="text-align: center;">
+                <h2>Nosso Cardápio</h2>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍽️ Entradas</h3>
+                <div class="menu-grid">
+                    <div class="menu-item"><div class="menu-img">🥗</div><div class="menu-info"><h4>Salda Caprese</h4><p>Tomate, mussarela de búfala, manjericão e redução balsâmica.</p></div><div class="price">R$ 32,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🍤</div><div class="menu-info"><h4>Camarão alho & óleo</h4><p>Camarões salteados com alho, azeite e salsinha.</p></div><div class="price">R$ 45,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🥖</div><div class="menu-info"><h4>Bruschetta</h4><p>Pão italiano com tomate, manjericão e azeite extra virgem.</p></div><div class="price">R$ 28,00</div></div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍝 Pratos Principais</h3>
+                <div class="menu-grid">
+                    <div class="menu-item"><div class="menu-img">🥩</div><div class="menu-info"><h4>Filé ao Molho Madeira</h4><p>Filé mignon com molho madeira, purê de batata e legumes salteados.</p></div><div class="price">R$ 79,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🐟</div><div class="menu-info"><h4>Salmão grelhado</h4><p>Salmão na manteiga de ervas, arroz de brócolis e farofinha crocante.</p></div><div class="price">R$ 74,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🍝</div><div class="menu-info"><h4>Ravioli de ricota</h4><p>Ravioli caseiro ao molho de tomates assados e manjericão.</p></div><div class="price">R$ 58,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🍗</div><div class="menu-info"><h4>Frango à parmegiana</h4><p>Filé de frango empanado, molho de tomate e queijo gratinado.</p></div><div class="price">R$ 52,00</div></div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍰 Sobremesas</h3>
+                <div class="menu-grid">
+                    <div class="menu-item"><div class="menu-img">🍫</div><div class="menu-info"><h4>Brownie com sorvete</h4><p>Brownie quente com bola de sorvete de creme.</p></div><div class="price">R$ 24,00</div></div>
+                    <div class="menu-item"><div class="menu-img">🍮</div><div class="menu-info"><h4>Pudim de leite</h4><p>Receita tradicional com calda de caramelo.</p></div><div class="price">R$ 15,00</div></div>
+                </div>
+            </div>
+
+            <div class="reserve-note">
+                <p>🍷 <strong>Funcionamento:</strong> Terça a Domingo, das 12h às 15h e das 19h às 23h | <strong>Reservas recomendadas para jantar</strong> pelo telefone ou WhatsApp.</p>
+                <p style="font-size: 0.9rem;">🚫 Este restaurante não realiza entregas em domicílio. O atendimento é exclusivo no salão.</p>
+            </div>
+        </section>
+
+        <section id="contato" class="contact">
+            <div style="text-align: center;">
+                <h2>Contato & Localização</h2>
+            </div>
+            <div class="contact-info">
+                <div class="contact-details">
+                    <p>📞 <strong>Telefone:</strong> (11) 3456-7890</p>
+                    <p>📱 <strong>WhatsApp:</strong> (11) 98765-4321</p>
+                    <p>📍 <strong>Endereço:</strong> Rua dos Sabores, 123 - Jardim Gastrônomo, São Paulo - SP</p>
+                    <p>🕒 <strong>Horário de funcionamento:</strong><br>Terça a Sábado: 12h às 15h e 19h às 23h<br>Domingo: 12h às 17h (fecha às segundas)</p>
+                    <p>💳 Aceitamos todos os cartões e PIX.</p>
+                </div>
+                <div class="map">
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-46.633308%2C-23.550520%2C-46.633308%2C-23.550520&layer=mapnik&marker=-23.550520%2C-46.633308" allowfullscreen="" loading="lazy"></iframe>
+                    <small><a href="https://www.openstreetmap.org/?mlat=-23.5505&mlon=-46.6333#map=19/-23.5505/-46.6333" target="_blank">Ver mapa ampliado</a></small>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Sabores do Chef - Restaurante • Atendimento exclusivo no local • Feito com carinho para você.</p>
+    </footer>
+
+    <script>
+        // Rolagem suave para os links internos (opcional, mas deixa mais elegante)
+        document.querySelectorAll('.nav-links a, .hero-content a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
